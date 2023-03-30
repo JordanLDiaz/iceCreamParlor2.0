@@ -1,0 +1,245 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scoop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.9.96/css/materialdesignicons.min.css">
+  <!-- <link rel="icon" href="./img/kiwi-bird-sitting-on-kiwis.png" /> -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+  body.debug .container,
+  body.debug .container-fluid {
+    outline: 2px double blue;
+    outline-offset: -2px;
+  }
+
+  body.debug .row {
+    outline: 2px dashed red;
+    outline-offset: -2px;
+  }
+
+  body.debug [class*="col-"] {
+    outline: 2px dotted forestgreen;
+    outline-offset: -3px;
+  }
+</style>
+
+<body class="container-fluid">
+  <div class="row p-5">
+    <!-- SECTION Cart -->
+    <section class="col-5 p-4 bg-warning rounded reciept">
+      <h3 class="text-center">Your Recipt</h3>
+      <div class="row text-center">
+        <h3 class="col-3 mb-0 p-2">Name</h3>
+        <h3 class="col-3  mb-0 p-2">Quantity</h3>
+        <h3 class="col-3  mb-0 p-2">Cost Per</h3>
+        <h3 class="col-3  mb-0 p-2">Cost Total</h3>
+      </div>
+      <div id="cart" class="row text-center"></div>
+
+      <!-- TOTAL -->
+      <div class="row justify-content-between border border-3 border-dark">
+        <div class="col-4">
+          <button onclick="checkout()" class="btn btn-success my-1">Checkout</button>
+        </div>
+        <div class="col-6 text-end">
+          <h4>Total: $<span class="" id="total"> 0 </span></h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION Menu -->
+    <section class="col-7">
+      <div class="row">
+        <h2 class="text-center">Menu</h2>
+      </div>
+      <div class="row">
+        <h3 class="text-center">Toppings</h3>
+      </div>
+      <div class="row justify-content-evenly">
+        <div class="col-3 card bg-warning text-white m-3">
+          <img
+            src="https://images.unsplash.com/photo-1516746924755-babd21844370?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3ByaW5rbGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1000&q=60"
+            class="img-fluid rounded mt-2" alt="sprinkles">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Sprinkles $2</h5>
+              <button onclick="selectTopping('Sprinkles')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img
+            src="https://images.unsplash.com/photo-1585503100597-d70e5dc45d81?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            class="img-fluid rounded mt-2" alt="chocolate chips">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Chocolate Chips $2</h5>
+              <button onclick="selectTopping('Chocolate Chips')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img
+            src="https://images.unsplash.com/photo-1586195831749-9fc3b289b4e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNvY29udXQlMjBmbGFrZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+            class="img-fluid rounded mt-2" alt="coconut flakes">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Coconut Flakes $2</h5>
+              <button onclick="selectTopping('Coconut Flakes')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="text-center">Vessels</h3>
+      </div>
+      <div class="row justify-content-evenly">
+        <div class="col-3 card bg-warning text-white m-3">
+          <img
+            src="https://images.unsplash.com/photo-1513329634746-37399553de66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHdhZmZsZSUyMGNvbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+            class="img-fluid rounded mt-2" alt="waffle cone">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Waffle Cone $3</h5>
+              <button onclick="selectVessel('Waffle Cone')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img
+            src="https://media.istockphoto.com/id/512743692/photo/wafer-basket-with-vanilla-ice-cream.jpg?s=612x612&w=0&k=20&c=F9fja-pa6Uj5y5eGKMYA3RMOFYEHbsVLRlRBqlg4HQk="
+            class="img-fluid rounded mt-2" alt="Waffle Bowl">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Waffle Bowl $4</h5>
+              <button onclick="selectVessel('Waffle Bowl')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img src="https://www.simplyscratch.com/wp-content/uploads/2012/07/fun-cones.jpg"
+            class="img-fluid rounded mt-2" alt="dipped cone">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Dipped Cone $5</h5>
+              <button onclick="selectVessel('Dipped Cone')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="text-center">Flavors</h3>
+      </div>
+      <div class="row justify-content-evenly">
+        <div class="col-3 card bg-warning text-white m-3">
+          <img src="https://www.savoryexperiments.com/wp-content/uploads/2021/06/Vanilla-Ice-Cream-9.jpg"
+            class="img-fluid rounded mt-2" alt="vanilla">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Vanilla $3</h5>
+              <button onclick="selectFlavor('Vanilla')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img
+            src="https://www.seriouseats.com/thmb/psLdr3356yqqFcm1o1_zxQ4YxEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-dark-chocolate-ice-cream-recipe-hero-446dacb9d3ce443e8e9880dbd095ef4c.jpg"
+            class="img-fluid rounded mt-2" alt="chocolate">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Chocolate $3</h5>
+              <button onclick="selectFlavor('Chocolate')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img src="https://www.kingarthurbaking.com/sites/default/files/2022-05/cookies-and-cream-ice-cream_0422.jpg"
+            class="img-fluid rounded mt-2" alt="Cookies n cream">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Cookies 'n' Cream $3</h5>
+              <button onclick="selectFlavor('Cookies n Cream')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img src="https://www.chewoutloud.com/wp-content/uploads/2020/04/Mint-Chip-Ice-Cream-Horizontal-1024x683.jpg"
+            class="img-fluid rounded mt-2" alt="mint choco">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Mint Chocolate Chip $4</h5>
+              <button onclick="selectFlavor('Mint Chocolate Chip')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img src="https://www.imperialsugar.com/sites/default/files/recipe/Birthday-Cake-Ice-Cream-imperial.jpg"
+            class="img-fluid rounded mt-2" alt="birthday cake">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Birthday Cake $4</h5>
+              <button onclick="selectFlavor('Birthday Cake')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 card bg-warning text-white m-3">
+          <img
+            src="https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2022-08/cookie-dough-ice-cream-jp-220816-835bf0.jpg"
+            class="img-fluid rounded mt-2" alt="Cookies dough">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="text-center">Cookie Dough $4</h5>
+              <button onclick="selectFlavor('Cookie Dough')" class="btn btn-success"><span
+                  class="mdi mdi-cart-variant"></span></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+
+
+
+  <!-- Bootstrap JS Libraries  -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+    crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
